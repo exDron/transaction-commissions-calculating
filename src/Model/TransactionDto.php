@@ -1,7 +1,7 @@
 <?php
 declare(strict_types=1);
 
-namespace App\Service\Model;
+namespace App\Model;
 
 class TransactionDto
 {

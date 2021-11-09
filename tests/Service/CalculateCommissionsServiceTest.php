@@ -2,7 +2,7 @@
 declare(strict_types=1);
 
 use App\Service\CalculateCommissionService;
-use App\Service\Model\TransactionDto;
+use App\Model\TransactionDto;
 use App\Service\Provider\BinListApiProviderInterface;
 use App\Service\Provider\ExchangeRatesApiProviderInterface;
 use PHPUnit\Framework\MockObject\MockObject;

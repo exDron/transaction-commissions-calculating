@@ -3,7 +3,7 @@ declare(strict_types=1);
 
 namespace App\Service\Parser;
 
-use App\Service\Model\TransactionDto;
+use App\Model\TransactionDto;
 use JsonException;
 use RuntimeException;
 
