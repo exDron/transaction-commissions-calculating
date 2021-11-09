@@ -33,7 +33,7 @@ final class CalculateCommissionService
      */
     public function calculate(array $transactionsData): array
     {
-        if (count($transactionsData) === 0) {
+        if (empty($transactionsData)) {
             throw new RuntimeException('Transaction data are missed!');
         }
 
