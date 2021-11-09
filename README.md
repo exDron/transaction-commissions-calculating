@@ -14,6 +14,10 @@ run
 composer install
 ```
 in the root directory to install all necessary dependencies for this example
+
+## Config
+To change API urls, EU countries list or coefficients please edit ```src/config/config.php```
+
 ## Usage
 
 ```php

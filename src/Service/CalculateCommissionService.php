@@ -3,7 +3,7 @@ declare(strict_types=1);
 
 namespace App\Service;
 
-use App\Service\Model\TransactionDto;
+use App\Model\TransactionDto;
 use App\Service\Provider\BinListApiProviderInterface;
 use App\Service\Provider\ExchangeRatesApiProviderInterface;
 use Exception;
