@@ -1,23 +1,23 @@
 <?php
 declare(strict_types=1);
 
-use App\Service\CalculateCommissionService;
+use App\Service\CommissionCalculator;
 use App\Model\TransactionDto;
 use App\Service\Provider\BinListApiProviderInterface;
 use App\Service\Provider\ExchangeRatesApiProviderInterface;
 use PHPUnit\Framework\MockObject\MockObject;
 use PHPUnit\Framework\TestCase;
 
-final class CalculateCommissionsServiceTest extends TestCase
+final class CommissionCalculatorTest extends TestCase
 {
-    private CalculateCommissionService $calculateCommissionsService;
+    private CommissionCalculator $commissionCalculator;
 
     /**
-     * @var ExchangeRatesApiProviderInterface|mixed|MockObject
+     * @var ExchangeRatesApiProviderInterface|mixed|MockObject|null
      */
     private mixed $exchangeApiProvider;
     /**
-     * @var BinListApiProviderInterface|mixed|MockObject
+     * @var BinListApiProviderInterface|mixed|MockObject|null
      */
     private mixed $binApiProvider;
 
@@ -29,7 +29,7 @@ final class CalculateCommissionsServiceTest extends TestCase
         $this->exchangeApiProvider = $this->createMock(ExchangeRatesApiProviderInterface::class);
         $this->binApiProvider = $this->createMock(BinListApiProviderInterface::class);
 
-        $this->calculateCommissionsService = new CalculateCommissionService($this->exchangeApiProvider, $this->binApiProvider);
+        $this->commissionCalculator = new CommissionCalculator($this->exchangeApiProvider, $this->binApiProvider);
     }
 
     public function testTransactionDataCalculationEURinEU(): void
@@ -51,7 +51,7 @@ final class CalculateCommissionsServiceTest extends TestCase
         $transactionDto->amount = 100.00;
         $transactionDto->currency = 'EUR';
 
-        $results = $this->calculateCommissionsService->calculate([$transactionDto]);
+        $results = $this->commissionCalculator->calculate([$transactionDto]);
 
         $this->assertEquals(1, array_shift($results));
     }
@@ -75,7 +75,7 @@ final class CalculateCommissionsServiceTest extends TestCase
             ->willReturn(0.01)
         ;
 
-        $results = $this->calculateCommissionsService->calculate([$transactionDto]);
+        $results = $this->commissionCalculator->calculate([$transactionDto]);
 
         $this->assertEquals(0.43, array_shift($results));
     }
@@ -99,7 +99,7 @@ final class CalculateCommissionsServiceTest extends TestCase
             ->willReturn(0.02)
         ;
 
-        $results = $this->calculateCommissionsService->calculate([$transactionDto]);
+        $results = $this->commissionCalculator->calculate([$transactionDto]);
 
         $this->assertEquals(1.53, array_shift($results));
     }
@@ -107,6 +107,6 @@ final class CalculateCommissionsServiceTest extends TestCase
     public function testTransactionDataCalculationWrongData(): void
     {
         $this->expectException(RuntimeException::class);
-        $this->calculateCommissionsService->calculate([]);
+        $this->commissionCalculator->calculate([]);
     }
 }

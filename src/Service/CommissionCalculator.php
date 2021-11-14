@@ -9,7 +9,7 @@ use App\Service\Provider\ExchangeRatesApiProviderInterface;
 use Exception;
 use RuntimeException;
 
-final class CalculateCommissionService
+final class CommissionCalculator
 {
     private ExchangeRatesApiProviderInterface $ratesApiProvider;
     private BinListApiProviderInterface $binListApiProvider;
@@ -33,7 +33,7 @@ final class CalculateCommissionService
      */
     public function calculate(array $transactionsData): array
     {
-        if (empty($transactionsData)) {
+        if (count($transactionsData) === 0) {
             throw new RuntimeException('Transaction data are missed!');
         }
 

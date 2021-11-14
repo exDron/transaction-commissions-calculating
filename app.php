@@ -3,7 +3,7 @@ declare(strict_types=1);
 
 require './vendor/autoload.php';
 
-use App\Service\CalculateCommissionService;
+use App\Service\CommissionCalculator;
 use App\Service\Http\CurlHttpClient;
 use App\Service\Parser\FileTransactionDataParser;
 use App\Service\Provider\BinListApiProvider;
@@ -29,8 +29,8 @@ try {
     $ratesApiProvider = new ExchangeRatesApiProvider($httpClient);
     $binListApiProvider = new BinListApiProvider($httpClient);
 
-    $commissionCalculateService = new CalculateCommissionService($ratesApiProvider, $binListApiProvider);
-    $commissions = $commissionCalculateService->calculate($parsedData);
+    $commissionCalculator = new CommissionCalculator($ratesApiProvider, $binListApiProvider);
+    $commissions = $commissionCalculator->calculate($parsedData);
 
     foreach ($commissions as $commission) {
         echo $commission . "\r\n";

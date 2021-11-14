@@ -28,5 +28,5 @@ To change API urls, EU countries list or coefficients please edit ```src/config/
 ## Tests
 To run unit tests execute
 ```php
-     php ./vendor/bin/phpunit ./tests/Service/CalculateCommissionsServiceTest.php
+     php ./vendor/bin/phpunit ./Tests/Service/CommissionCalculatorTest.php
 ```
